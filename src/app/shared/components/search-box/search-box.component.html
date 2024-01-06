@@ -1,0 +1,9 @@
+<!-- (keyup.enter)="emitValue( txtImput.value )" -->
+
+<input
+    type="text"
+    class="form-control"
+    [placeholder]="placeHolder"
+    (keyup)="onKeyPress(txtImput.value)"
+    #txtImput
+>
