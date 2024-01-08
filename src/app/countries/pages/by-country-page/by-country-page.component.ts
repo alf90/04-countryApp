@@ -1,20 +1,26 @@
-import { Component, Output } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 
 import { CountriesService } from '../../services/countries.service';
 import { Country } from '../../interfaces/country';
-import { SearchBoxComponent } from '../../../shared/components/search-box/search-box.component';
+
 
 @Component({
   selector: 'app-by-country-page',
   templateUrl: './by-country-page.component.html',
   styles: ``
 })
-export class ByCountryPageComponent {
+export class ByCountryPageComponent implements OnInit {
 
   public isLoading: boolean = false;
   public countries: Country[] = [];
+  public initialValue: string = '';
 
   constructor(private countriesService: CountriesService) {}
+
+  ngOnInit(): void {
+    this.countries = this.countriesService.cacheStore.byCountries.countries;
+    this.initialValue = this.countriesService.cacheStore.byCountries.term;
+  }
 
   public searchByCountry( buscar: string): void {
     this.isLoading = true;
